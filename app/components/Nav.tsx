@@ -18,12 +18,15 @@ export function Nav() {
 
   const handleNav = (id: string) => {
     setOpen(false);
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.location.href = `/#${id}`;
-    }
+    // Use setTimeout to ensure DOM is ready and menu animation completes
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.location.href = `/#${id}`;
+      }
+    }, 100);
   };
 
   return (
@@ -36,9 +39,9 @@ export function Nav() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <div className="w-8 h-8 rounded-full bg-[#1a4731] flex items-center justify-center flex-shrink-0">
-            <span className="text-white text-xs font-bold">RP</span>
+            <span className="text-white text-xs font-bold hidden sm:block">RP</span>
           </div>
-          <span className="font-bold text-[#1a4731] text-sm leading-tight hidden sm:block">
+          <span className="font-bold text-[#1a4731] text-sm leading-tight block">
             Rev. Peter Olaleye
             <span className="block font-normal text-xs text-stone-500">Charity Foundation</span>
           </span>
@@ -87,18 +90,27 @@ export function Nav() {
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-white border-t border-stone-100 px-5 pb-5 pointer-events-auto"
           >
-            {links.map((l) => (
-              <button
+            {links.map((l, index) => (
+              <motion.button
                 key={l.id}
                 onClick={() => handleNav(l.id)}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                whileTap={{ scale: 0.98 }}
+                whileHover={{ x: 5 }}
                 className="flex w-full text-left py-3.5 text-stone-700 font-medium border-b border-stone-100 last:border-0 hover:text-[#1a4731] transition-colors text-sm items-center gap-2 cursor-pointer pointer-events-auto"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1a4731]/30 flex-shrink-0" />
                 {l.label}
-              </button>
+              </motion.button>
             ))}
             <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: links.length * 0.1 + 0.1 }}
               whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: 1.02 }}
               onClick={() => handleNav('donate')}
               className="mt-4 w-full py-3.5 bg-[#1a4731] text-white font-bold rounded-xl text-sm cursor-pointer pointer-events-auto"
             >

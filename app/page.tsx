@@ -432,7 +432,7 @@ function Donation() {
         <FadeIn delay={0.1}>
           <div className="bg-white rounded-3xl p-8 shadow-sm border border-stone-100">
             <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-3">Choose an amount</p>
-            <div className="grid grid-cols-4 gap-3 mb-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
               {PRESET_AMOUNTS.map((amt) => (
                 <motion.button
                   key={amt.value}
