@@ -85,13 +85,13 @@ export function Nav() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-white border-t border-stone-100 px-5 pb-5"
+            className="md:hidden overflow-hidden bg-white border-t border-stone-100 px-5 pb-5 pointer-events-auto"
           >
             {links.map((l) => (
               <button
                 key={l.id}
                 onClick={() => handleNav(l.id)}
-                className="flex w-full text-left py-3.5 text-stone-700 font-medium border-b border-stone-100 last:border-0 hover:text-[#1a4731] transition-colors text-sm items-center gap-2"
+                className="flex w-full text-left py-3.5 text-stone-700 font-medium border-b border-stone-100 last:border-0 hover:text-[#1a4731] transition-colors text-sm items-center gap-2 cursor-pointer pointer-events-auto"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1a4731]/30 flex-shrink-0" />
                 {l.label}
@@ -100,7 +100,7 @@ export function Nav() {
             <motion.button
               whileTap={{ scale: 0.97 }}
               onClick={() => handleNav('donate')}
-              className="mt-4 w-full py-3.5 bg-[#1a4731] text-white font-bold rounded-xl text-sm"
+              className="mt-4 w-full py-3.5 bg-[#1a4731] text-white font-bold rounded-xl text-sm cursor-pointer pointer-events-auto"
             >
               Donate Now
             </motion.button>
